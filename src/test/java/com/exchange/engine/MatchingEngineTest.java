@@ -81,9 +81,21 @@ class MatchingEngineTest {
     void partialFillSellSide() {
         // Mirror of the model above, other direction.
         // Arrange: resting BUY 50 @ 100.   Act: SELL 20 @ 100.
-        // Assert: 1 trade of 20 @ 100; book has ONE order left — the BUY with
-        //         30 remaining as bestBidPrice(); no asks (bestAskPrice() null).
-        fail("TODO");
+
+        engine.submit(Order.limit(1, Side.SELL, 100, 20));
+
+        // Act: BUY 10 @ 100 — exact opposite.
+        List<Trade> trades = engine.submit(Order.limit(2, Side.BUY, 100, 50));
+
+        assertEquals(1, trades.size());
+        assertEquals(20, trades.get(0).getQuantity());
+        assertEquals(100, trades.get(0).getPrice());
+        // ...and the SELL's remaining 30 still rests as the best ask,
+        // while the BUY is fully filled (no bids in the book).
+        assertEquals(1, engine.getBook().size());
+        assertEquals(100, engine.getBook().bestAskPrice());
+        assertEquals(30, engine.getBook().peekBest(Side.SELL).getQuantity());
+        assertNull(engine.getBook().bestBidPrice());
     }
 
     @Test
