@@ -57,6 +57,8 @@ public final class Order {
         return quantity;
     }
 
+
+
     public void setQuantity(long quantity) {
         this.quantity = quantity;
     }

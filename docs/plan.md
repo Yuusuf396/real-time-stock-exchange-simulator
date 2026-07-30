@@ -10,27 +10,27 @@ deterministic, correctness-critical backend that a real exchange runs on.
 Scotia, BMO, CIBC, IBM, consulting). A matching engine maps directly to bank
 capital-markets tech, uses the Java/Spring stack those employers run, and proves
 the systems depth that a resume of CRUD apps is missing. The scoped version is
-finishable solo in ~4 weeks.
+finishable solo in ~4 milestones.
 
 ## Scope (locked — do not grow mid-build)
 
 In scope:
 - One symbol, in-memory.
 - Limit + market orders, price-time priority, partial fills.
-- REST API (Spring Boot) — Week 3, after the engine is correct.
+- REST API (Spring Boot) — Milestone 3, after the engine is correct.
 - Deterministic test suite + a load benchmark.
 
 Out of scope (the things that killed earlier attempts):
 - Kafka, Rust, distributed systems.
 - Multiple symbols, a fancy frontend.
-- Postgres / Redis / persistence — optional, only after the 4 weeks.
+- Postgres / Redis / persistence — optional, only after the 4 milestones.
 
 ## Tech stack
 
 - Java 17 — core engine.
 - JUnit 5 — testing.
 - Maven — build.
-- Spring Boot — Week 3 only, and it holds NO matching logic.
+- Spring Boot — Milestone 3 only, and it holds NO matching logic.
 
 ## Correctness rules (baked into the scaffold — get these right)
 
@@ -45,7 +45,7 @@ Out of scope (the things that killed earlier attempts):
 
 ---
 
-## Week 1 — Core engine (no API, no frameworks)
+## Milestone 1 — Core engine (no API, no frameworks)
 
 Implement `OrderBook` then `MatchingEngine.submit()`. The scaffold has the
 field structure and a step-by-step algorithm in the Javadoc.
@@ -57,7 +57,7 @@ Success criteria:
 - Handles partial fills; outputs are deterministic.
 - *If this is wrong, everything else is worthless.*
 
-## Week 2 — Testing + edge cases (where you become good)
+## Milestone 2 — Testing + edge cases (where you become good)
 
 Turn the 11 stub tests in `MatchingEngineTest` green, then add more until
 behavior is unambiguous. Mindset: break your own engine, don't make it pretty.
@@ -72,7 +72,7 @@ Deliverable: 15–25 strong tests, zero ambiguous behavior.
 
 Success criteria: you can honestly say *"this engine is correct under defined rules."*
 
-## Week 3 — Spring Boot API (only now)
+## Milestone 3 — Spring Boot API (only now)
 
 Expose the engine as a service. Endpoints: `POST /order`, `GET /book`,
 `GET /trades`. Spring calls `MatchingEngine.submit()` — the engine stays pure
@@ -83,7 +83,7 @@ Rule: **if matching logic leaks into a controller, the architecture failed.**
 Success criteria: clean separation (API vs engine), stateless API layer, engine
 still testable on its own.
 
-## Week 4 — Polish + real-engineer signal
+## Milestone 4 — Polish + real-engineer signal
 
 - Structured trade logging (timestamp, buy id, sell id, price, qty).
 - Benchmark: simulate 10k–100k orders, measure throughput + latency (this is
@@ -96,7 +96,7 @@ Resume bullet this produces:
 > priority (limit + market orders, partial fills); validated via a JUnit suite and
 > load simulation at N orders/sec, p99 latency under X ms; deployed on AWS.
 
-## Optional phase (only after 4 weeks are solid)
+## Optional phase (only after 4 milestones are solid)
 
 Postgres persistence, Redis caching, Kafka event stream, web dashboard,
 multi-symbol. Jumping here early = failure.
@@ -110,10 +110,10 @@ multi-symbol. Jumping here early = failure.
 - [x] `Side`, `OrderType`, `Order`, `Trade` complete (data/enums).
 - [x] `OrderBook`, `MatchingEngine` scaffolded with TODO stubs.
 - [x] 11 test stubs as a red→green checklist.
-- [x] Week 1: `OrderBook` + `MatchingEngine.submit()` implemented; exactMatchFullFill passes (`mvn test` BUILD SUCCESS).
-- [ ] Week 2: turn the remaining 10 tests green + add edge cases.
-- [ ] Week 3: Spring Boot API.
-- [ ] Week 4: logging, benchmark, README.
+- [x] Milestone 1: `OrderBook` + `MatchingEngine.submit()` implemented; exactMatchFullFill passes (`mvn test` BUILD SUCCESS).
+- [ ] Milestone 2: turn the remaining 10 tests green + add edge cases.
+- [ ] Milestone 3: Spring Boot API.
+- [ ] Milestone 4: logging, benchmark, README.
 
 Start at: `OrderBook.addOrder`. Then ask for a review of the match loop before
 writing all the tests.

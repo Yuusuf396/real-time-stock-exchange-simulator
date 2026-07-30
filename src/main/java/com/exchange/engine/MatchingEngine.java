@@ -63,4 +63,7 @@ public final class MatchingEngine {
     public OrderBook getBook() {
         return book;
     }
+    public List<Order> getOrders(){
+        return book.getOrders();
+    }
 }

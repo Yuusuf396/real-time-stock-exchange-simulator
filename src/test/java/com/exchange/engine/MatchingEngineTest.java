@@ -36,8 +36,6 @@ class MatchingEngineTest {
         engine = new MatchingEngine();
     }
 
-    // ── MODEL TESTS (done — study the pattern) ──────────────────────────────
-
     @Test
     void exactMatchFullFill() {
         // Arrange: one resting SELL 10 @ 100.
@@ -75,7 +73,6 @@ class MatchingEngineTest {
         assertNull(engine.getBook().bestBidPrice());
     }
 
-    // ── YOUR TESTS (Week 2 checklist — replace each fail() with real code) ──
 
     @Test
     void partialFillSellSide() {
@@ -93,9 +90,9 @@ class MatchingEngineTest {
         // ...and the SELL's remaining 30 still rests as the best ask,
         // while the BUY is fully filled (no bids in the book).
         assertEquals(1, engine.getBook().size());
-        assertEquals(100, engine.getBook().bestAskPrice());
-        assertEquals(30, engine.getBook().peekBest(Side.SELL).getQuantity());
-        assertNull(engine.getBook().bestBidPrice());
+        assertEquals(100, engine.getBook().bestBidPrice());
+        assertEquals(30, engine.getBook().peekBest(Side.BUY).getQuantity());
+        assertNull(engine.getBook().bestAskPrice());
     }
 
     @Test

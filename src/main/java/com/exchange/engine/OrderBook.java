@@ -1,9 +1,6 @@
 package com.exchange.engine;
 
-import java.util.ArrayDeque;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * The order book: stores resting orders in price-time priority and hands back
@@ -93,5 +90,35 @@ public final class OrderBook {
             n += level.size();
         }
         return n;
+    }
+
+    public List<Order> getOrders(){
+        List<Order> orders = new ArrayList<>();
+
+        for (Deque<Order> level :bids.values()){
+            orders.addAll(level);
+        }
+        for (Deque<Order> level :asks.values()){
+            orders.addAll(level);
+        }
+        return orders;
+    }
+
+
+    public List<Order> getBidOrders(){
+        List<Order> bidOrder = new ArrayList<>();
+
+        for (Deque<Order> level :bids.values()){
+            bidOrder.addAll(level);
+        }
+        return bidOrder;
+    }
+    public List<Order> getAsksOrders(){
+        List<Order> asksOrder = new ArrayList<>();
+
+        for (Deque<Order> level :asks.values()){
+            asksOrder.addAll(level);
+        }
+        return asksOrder;
     }
 }

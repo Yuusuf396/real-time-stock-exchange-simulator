@@ -6,8 +6,9 @@ stock exchange. Incoming buy/sell orders are paired into trades using
 trade. This is the deterministic, correctness-critical backend that an exchange
 runs on — not a price predictor or a trading bot.
 
-> **Status:** Week 1 complete — the matching engine is implemented and verified
-> (`mvn test` → BUILD SUCCESS). Week 2 (full correctness test suite) in progress.
+> **Status:** Milestones 1–3 complete — engine implemented and verified (12/12
+> tests green), REST API live with validation, error handling (400/404), and a
+> DTO layer. Milestone 4 (benchmark + logging + docs) in progress.
 
 ---
 
@@ -82,13 +83,13 @@ mvn test-compile  # compile only
 
 ## Roadmap
 
-- [x] Week 1 — core engine (price-time priority, partial fills, market orders)
-- [ ] Week 2 — full correctness test suite + edge cases
-- [ ] Week 3 — Spring Boot REST API (`POST /order`, `GET /book`, `GET /trades`)
-- [ ] Week 4 — benchmark (throughput + latency) + structured trade logging
+- [x] Milestone 1 — core engine (price-time priority, partial fills, market orders)
+- [x] Milestone 2 — full correctness test suite + edge cases (12 tests, incl. random-load invariant)
+- [x] Milestone 3 — Spring Boot REST API (`POST /orders`, `GET /orders/book`, `GET /orders/trades`)
+- [ ] Milestone 4 — benchmark (throughput + latency) + structured trade logging
 
 ---
 
 ## Tech stack
 
-Java 17 · JUnit 5 · Maven · Spring Boot (Week 3)
+Java 17 · JUnit 5 · Maven · Spring Boot
