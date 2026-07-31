@@ -27,8 +27,10 @@ curl -X POST localhost:8080/orders -H "Content-Type: application/json" \
 
 ## To do, in order
 
-1. **`GET /orders/{id}`** — returns raw engine `Order` (leaks `sequence`).
-   Give it a small DTO or delete the endpoint.
+1. **`GET /orders/{id}`** — returns raw engine `Order` (leaks `sequence`) and
+   shows a stale quantity for fully-filled resting orders (the engine removes
+   them from the book without zeroing the field). Give it a DTO with an honest
+   remaining/filled story, or delete the endpoint.
 2. **Dead code** — remove unused `MatchingEngine.getOrders()` and
    `OrderBook.getOrders()`.
 3. **Market orders via API** — add `type` (`LIMIT`/`MARKET`) to `OrderRequest`;
